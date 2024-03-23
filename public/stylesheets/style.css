@@ -1,0 +1,29 @@
+body {
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.sensors {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 16px;
+}
+
+.sensor {
+  background-color: aliceblue;
+  color: olivedrab;
+  padding: 36px;
+}
+
+.sensor > .sensor-name {
+  font-size: 36px;
+}
+.sensor > .sensor-temp {
+  font-size: 72px;
+}
+
+
+
+
+a {
+  color: #00B7FF;
+}
