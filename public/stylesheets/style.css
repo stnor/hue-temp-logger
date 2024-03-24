@@ -1,11 +1,12 @@
 body {
   font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 16px;
 }
 
 .sensors {
   display: grid;
-  grid-template-columns: repeat(2, auto);
   gap: 16px;
+  grid-template-columns: repeat(1, auto);
 }
 
 .sensor {
@@ -18,6 +19,8 @@ body {
   font-size: 36px;
 }
 .sensor > .sensor-temp {
+  display: flex;
+  justify-content: flex-end;
   font-size: 72px;
 }
 

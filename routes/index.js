@@ -18,13 +18,14 @@ router.get('/', function (req, res, next) {
         api.sensors.getAll().then(sensors => {
             const tempSensors = sensors
                 .map(s => s.data)
-                .filter(d => d.type === 'ZLLTemperature' && d.state.temperature != undefined)
+                .filter(d => d.type === 'ZLLTemperature' && d.state.temperature !== undefined)
             // The sensor would have been previously obtained from the bridge.
             tempSensors.forEach(s => {
                 s.name = sensorFriendlyNames.get(s.id);
+                s.state.temperatureC = (s.state.temperature / 100).toFixed(1);
             });
 
-            res.render('index', {title: 'Express', tempSensors: tempSensors});
+            res.render('index', {tempSensors: tempSensors});
         });
     });
 });
