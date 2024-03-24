@@ -1,0 +1,47 @@
+#!/usr/bin/env node
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('../db/temperature.db');
+
+const hue = require('node-hue-api');
+const host = '192.168.2.59';
+const USERNAME = 'Cn4LInILNmhnPvYVQ1jfGtjW9NjT9-HYHY52N7b6';
+
+function initDb() {
+    db.serialize(() => {
+        db.run("CREATE TABLE IF NOT EXISTS TEMPERATURE (" +
+            "id INTEGER PRIMARY KEY, " +
+            "sensor INTEGER, " +
+            "temperature INTEGER, " +
+            "obstime DATETIME);");
+        db.run("CREATE INDEX IF NOT EXISTS TEMPERATURE_BY_SENSOR ON TEMPERATURE (sensor)");
+    });
+}
+
+async function doPoll() {
+    return hue.api.createLocal(host).connect(USERNAME).then(api => {
+        return api.sensors.getAll().then(sensors => {
+            const tempSensors = sensors
+                .map(s => s.data)
+                .filter(d => d.type === 'ZLLTemperature' && d.state.temperature !== undefined)
+            const now = new Date();
+            return {
+                ts: now,
+                sensors: tempSensors.map(s => {
+                    return {id: s.id, temp: s.state.temperature}
+                })
+            };
+        });
+    });
+}
+
+initDb();
+
+doPoll().then(res => {
+    const stmt = db.prepare("INSERT INTO TEMPERATURE (sensor, temperature, obstime) VALUES (?, ?, ?)");
+    res.sensors.forEach(s => {
+        stmt.run(s.id, s.temp, res.ts);
+    })
+    stmt.finalize();
+    db.close();
+})
+

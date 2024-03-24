@@ -9,25 +9,20 @@ const sensorFriendlyNames = new Map([
         [55, 'Entré']
     ]
 );
+const SENSOR_COUNT = sensorFriendlyNames.size;
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./db/temperature.db');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    const host = '192.168.2.59';
-    const USERNAME = 'Cn4LInILNmhnPvYVQ1jfGtjW9NjT9-HYHY52N7b6';
-    return hue.api.createLocal(host).connect(USERNAME).then(api => {
-        api.sensors.getAll().then(sensors => {
-            const tempSensors = sensors
-                .map(s => s.data)
-                .filter(d => d.type === 'ZLLTemperature' && d.state.temperature !== undefined)
-            // The sensor would have been previously obtained from the bridge.
-            tempSensors.forEach(s => {
-                s.name = sensorFriendlyNames.get(s.id);
-                s.state.temperatureC = (s.state.temperature / 100).toFixed(1);
-            });
-
-            res.render('index', {tempSensors: tempSensors});
+    db.all("SELECT * FROM TEMPERATURE ORDER BY ID DESC limit " + SENSOR_COUNT, (err, rows) => {
+        console.log(err, rows);
+        rows.forEach(row => {
+            row.sensorName = sensorFriendlyNames.get(row.sensor);
+            row.temperatureC = (row.temperature / 100).toFixed(1);
+            row.obstime = new Date(row.obstime).toLocaleString('sv-SE');
         });
+        res.render('index', {tempSensors: rows});
     });
 });
-
 module.exports = router;

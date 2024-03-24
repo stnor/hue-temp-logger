@@ -4,7 +4,8 @@ block content
   section.sensors
     each s in tempSensors
       div.sensor
-        div.sensor-name= s.name
+        div.sensor-name= s.sensorName
         div.sensor-temp
-          span= s.state.temperatureC
+          span= s.temperatureC
           span °
+        div= s.obstime
