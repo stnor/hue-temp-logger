@@ -24,9 +24,8 @@ body {
   font-size: 72px;
 }
 
-
-
-
-a {
-  color: #00B7FF;
+.footer {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-evenly;
 }

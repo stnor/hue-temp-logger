@@ -8,4 +8,13 @@ block content
         div.sensor-temp
           span= s.temperatureC
           span °
-        div= s.obstime
+  section.footer
+    div= obsTime
+    div
+      span Min:&nbsp;
+      span= min
+      span °
+    div
+      span Max:&nbsp;
+      span= max
+      span °
