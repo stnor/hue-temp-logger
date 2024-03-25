@@ -19,7 +19,7 @@ displaying the min/max based on that series. I'm taking the lowest value to disr
 from sensors in the sun.
 
 ## Tech stack
-Uses https://github.com/peter-murray/node-hue-api
+Uses https://github.com/peter-murray/node-hue-api.
 I deployed the project on an old Raspberry PI 2 running Debian. Node 21/Express, SQLite3.
 
 ## Notes
