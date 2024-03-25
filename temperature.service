@@ -1,0 +1,15 @@
+# Temperature reporting nodejs service
+#
+[Unit]
+Description=Temperature reporting
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/stnor/hue-temp-logger/bin/www
+User=stnor
+WorkingDirectory=/home/stnor/hue-temp-logger
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
