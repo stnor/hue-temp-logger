@@ -25,7 +25,18 @@ body {
 }
 
 .footer {
-  margin-top: 16px;
+  margin-top: 8px;
+  padding: 36px;
+  font-size: 36px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer .small {
+  font-size: 18px;
+}
+
+.footer .dash {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }

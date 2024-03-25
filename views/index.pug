@@ -9,12 +9,14 @@ block content
           span= s.temperatureC
           span °
   section.footer
-    div= obsTime
     div
-      span Min 24h:&nbsp;
-      span= min
-      span °
+      div.small Senaste mätning
+      div= obsTime
     div
-      span Max 24h:&nbsp;
-      span= max
-      span °
+      div.small Temperaturintervall 24 tim
+      div
+        span= min
+        span °
+        span.dash &mdash;
+        span= max
+        span °

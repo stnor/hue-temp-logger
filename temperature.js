@@ -74,8 +74,9 @@ api.getData = async function getData() {
                 //plocka ur det lägsta värdet per observation
                 lowestPerObs.push(Math.min(...tempsInObs));
             }
+            const dateStr = new Date(rows[0].obstime).toLocaleString('sv-SE').substring()
             resolve({tempSensors: rows.slice(0, SENSOR_COUNT),
-                obsTime: new Date(rows[0].obstime).toLocaleString('sv-SE'),
+                obsTime: dateStr.substring(0, dateStr.length-3),
                 max: Math.max(...lowestPerObs),
                 min: Math.min(...lowestPerObs)});
         });
