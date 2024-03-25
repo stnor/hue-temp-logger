@@ -4,7 +4,7 @@ I created this small project for logging and displaying the temperature for my f
 
 ## How it works
 The node server polls the HUE bridge every 15 minutes. The cron expression is in temperature.js.
-Each sensor and temperature value gets saved to a sqlite database file, which is in turn used to desiplay the 
+Each sensor and temperature value gets saved to a sqlite database file, which is in turn used to display the 
 temperature and the min/max values on the web page.
 
 The min/max values are calculated by taking the lowest sensor value for each poll for the last 24 h and then
