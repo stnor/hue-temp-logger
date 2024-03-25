@@ -6,7 +6,8 @@ I created this small project for logging and displaying the temperature for my f
 I deployed the project on an old Raspberry PI 2 running Debian. Node 21/Express, SQLite3.
 
 ## Notes
-Endpoint, credentials, sensor friendly names are hardcoded in temperature.js
+Endpoint, credentials, sensor friendly names are hardcoded in temperature.js.
 
+The systemd-service has a hard coded directory and username too.
 
 
