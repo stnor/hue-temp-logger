@@ -1,5 +1,5 @@
 # Temperature logger for Philips HUE
-As Philips is closing down HUE Labs, which was the onlu place that displayed the temperature,
+As Philips is closing down HUE Labs, which was the only place that displayed the temperature afaik,
 I created this small project for logging and displaying the temperature for my four Philips Hue motion detectors.
 
 ## Tech stack
