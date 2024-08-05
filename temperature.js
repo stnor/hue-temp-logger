@@ -6,6 +6,7 @@ const USERNAME = 'Cn4LInILNmhnPvYVQ1jfGtjW9NjT9-HYHY52N7b6';
 
 const sensorFriendlyNames = new Map([
         [8, 'Carport'],
+        [30, '???'],
         [39, 'Gavel mot relax'],
         [48, 'Lillstugan'],
         [55, 'Entré']
