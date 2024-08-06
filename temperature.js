@@ -6,7 +6,6 @@ const USERNAME = 'Cn4LInILNmhnPvYVQ1jfGtjW9NjT9-HYHY52N7b6';
 
 const sensorFriendlyNames = new Map([
         [8, 'Carport'],
-        [30, '???'],
         [39, 'Gavel mot relax'],
         [48, 'Lillstugan'],
         [55, 'Entré']
@@ -63,7 +62,7 @@ api.startup = () => {
 api.getData = async function getData() {
     const last24hours = new Date().getTime() - 60 * 60 * 24 * 1000;
     return new Promise((resolve, reject) => {
-        db.all("SELECT * FROM TEMPERATURE WHERE obstime > " + last24hours + " ORDER BY ID DESC", (err, rows) => {
+        db.all("SELECT * FROM TEMPERATURE WHERE obstime > " + last24hours + " AND SENSOR IN (8,39,48,55) ORDER BY ID DESC", (err, rows) => {
             rows.forEach(row => {
                 row.sensorName = sensorFriendlyNames.get(row.sensor);
                 row.temperatureC = Number((row.temperature / 100).toFixed(1));
