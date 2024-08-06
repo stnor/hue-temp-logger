@@ -64,7 +64,7 @@ api.getData = async function getData() {
     return new Promise((resolve, reject) => {
         db.all("SELECT * FROM TEMPERATURE WHERE obstime > " + last24hours + " AND SENSOR IN (8,39,48,55) ORDER BY ID DESC", (err, rows) => {
             rows.forEach(row => {
-                row.sensorName = sensorFriendlyNames.get(row.sensor);
+                row.sensorName = sensorFriendlyNames.get(+row.sensor);
                 row.temperatureC = Number((row.temperature / 100).toFixed(1));
             });
             const observationTimes = [...new Set(rows.map(r => r.obstime))];
